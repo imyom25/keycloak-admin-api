@@ -49,7 +49,7 @@ public class MasterAdminController {
         UserRepresentation user = getNewUserRepresentation(request, credential);
         kcMaster.realm(request.getCompanyName()).users().create(user);
 
-        UserDTO newUser = getResponse(request, kcMaster);
+        UserDTO newUser = buildResponse(request, kcMaster);
         return newUser;
     }
 
@@ -67,7 +67,7 @@ public class MasterAdminController {
     }
 
 
-    private UserDTO getResponse(@RequestBody CreateUserRequest request, Keycloak kcMaster) throws InvalidDataException {
+    private UserDTO buildResponse(CreateUserRequest request, Keycloak kcMaster) throws InvalidDataException {
 
         return kcMaster.realms().realm(request.getCompanyName()).users().search(request
                 .getUserName())
